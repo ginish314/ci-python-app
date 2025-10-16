@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Python CI
 
 on:
   push:
@@ -14,14 +14,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          node-version: 18
+          python-version: "3.10"
 
       - name: Install dependencies
-        run: npm install
-
-      - name: Build and test
         run: |
-          node index.js
+          python -m pip install --upgrade pip
+          pip install pytest
+
+      - name: Run tests
+        run: pytest
